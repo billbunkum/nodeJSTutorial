@@ -1,4 +1,5 @@
 const request = require('request');
+<<<<<<< HEAD
 
 const darkskyAPIKey = '297842be681beeba3e18b115c8bab523';
 const units = '?units=si';
@@ -34,6 +35,45 @@ request( { url: mapboxURL, json: true }, (error, response) => {
 		let latitude = response.body.features[0].geometry.coordinates[1]
 		let longitude = response.body.features[0].geometry.coordinates[0];
 		console.log(`Longitude is ${longitude} and Latitude is ${latitude}`);
+=======
+const yargs = require('yargs');
+const geocode = require('./geocode/geocode.js');
+const weather = require('./weather/weather.js');
+
+// TAKES INPUT FROM PROCESSED VAR PASSES THRU YARGS AND STORES
+// PARSED OUTPUT IN argv
+
+const argv = yargs
+	.options({
+		a: {
+			demand: true,
+			alias: 'address',
+			describe: 'The address used for weather',
+			string: true
+		}
+	})
+	.help()
+	.alias('help', 'h')
+	.argv;
+
+// let latitude = 37.8267;
+// let longitude = -122.4233;
+
+geocode.getLocation(argv.address, (errorMessage, results) => {
+	if (errorMessage) {
+		console.log(errorMessage);
+	} else {
+		console.log(results.address);
+		weather.getWeather(results.latitude, results.longitude, (errorMessage, weatherResults) => {
+			if (errorMessage) {
+				console.log(`BUTTHOLE ${errorMessage}`);
+			} else {
+				console.log(
+						`It's ${weatherResults.temperature} but feels like ${weatherResults.apparentTemperature}!`
+					);
+			}
+});
+>>>>>>> 58e3257c29637ced280b6bc77a2ad2e8dfbba21f
 	}
 });
 
