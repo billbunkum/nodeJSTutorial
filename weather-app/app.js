@@ -1,8 +1,9 @@
 const request = require('request');
 const geocode = require('./utils/geocode.js');
+const darksky = require('./utils/darksky.js');
 
-const darkskyAPIKey = '297842be681beeba3e18b115c8bab523';
-const units = '?units=si';
+// const darkskyAPIKey = '297842be681beeba3e18b115c8bab523';
+// const units = '?units=si';
 // QUERY STRINGS APPEAR AT END OF URLS AND BEGIN W/ `?`, CAN ADD MORE USE `&`
 // GETS WEATHER INFO BASED ON LAT & LONG VALUES
 
@@ -34,11 +35,24 @@ const units = '?units=si';
 // 	console.log(`Longitude is ${longitude} and Latitude is ${latitude}`);
 // });
 
-// PROPERTIES IN THE ANONYMOUS FUNCTION ARE NOT ENFORCED BUT ARE BEST-PRACTICE
+// 'PROPERTIES' IN THE ANONYMOUS FUNCTION ARE NOT ENFORCED BUT ARE BEST-PRACTICE
 geocode('Tokyo', (error, response) => {
 	if(error) {
 		console.log('Error ', error)
 	} else {
-		console.log(response);
+		// console.log(response);
+		let coordinates = {
+			latitude: response.latitude,
+			longitude: response.longitude,
+			location: response.location
+		};
+		console.log('coordinates are ', coordinates);
+		darksky(coordinates, (error, response) => {
+			if (error) {
+				console.log(error);
+			} else {
+				console.log('Weather in ', response.body.timezone, ' is ', response.body.daily.summary);
+			}
+		});
 	}
 });
