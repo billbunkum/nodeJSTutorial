@@ -1,6 +1,7 @@
 const request = require('request');
 const geocode = require('./utils/geocode.js');
-const darksky = require('./utils/darksky.js');
+// const darksky = require('./utils/darksky.js');
+const forecast = require('./utils/forecast.js');
 
 // const darkskyAPIKey = '297842be681beeba3e18b115c8bab523';
 // const units = '?units=si';
@@ -55,4 +56,9 @@ geocode('Tokyo', (error, response) => {
 			}
 		});
 	}
+});
+
+forecast(-75.7088, 44.1545, (error, data) => {
+	console.log('Error', error);
+	console.log('Data', data);
 });
