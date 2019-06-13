@@ -1,38 +1,47 @@
+// FOR GRABBING FULL FILE PATH
+const path = require('path');
+// FOR ROUTING-EASE
 const express = require('express');
 
 const app = express();
 
-// EXAMPLE DOMAIN
-	// app.com
-	// app.com/help
-	// app.com/about
-	// app.com/weather
+// MAKING/SETTING UP ROUTES
 
-// SETTING UP ROUTES
-	// .get('domain/subdir', (req, res) => {})
-	// INITIAL VALUE IS url OF server -> '' IS ON DOMAIN W/O SUBDIRz
-	// NEXT IS function FOR WHAT TO DO
+// ACCESSING INFO ON node object
+// console.log(__dirname);
+// console.log(__filename);
+console.log(path.join(__dirname, '../public'));
 
-app.get('', (req, res) => {
-	res.send('Hello Express!');
+// CUSTOMIZE SERVER W/ app.use()
+	// ALLOWS express TO CHECK THIS PATH FOR path names AND SO DO NOT NEED app.get('pathName') AS BELOW FOR SERVING UP html docs
+const publicDirectoryPath = path.join(__dirname, '../public');
+
+app.use(express.static(publicDirectoryPath));
+
+// ROUTING BY HAND
+	// DO NOT NEED COS app.use SERVES UP HOME PATH
+	// app.get('', (req, res) => {
+	// 	res.send('Hello Express!');
+	// });
+app.get('/testPage1', (req, res) => {
+	res.send({
+		name: 'Bill',
+		age: 37
+	});
+});
+app.get('/testPage2', (req, res) => {
+	res.send('<title>Test Page2 Here</title>');
 });
 
-app.get('/help', (req, res) => {
-	res.send('Help page');
-});
-
-app.get('/about', (req, res) => {
-	res.send('About page');
-});
-
+// ROUTING W/ OBJECTS, ARRAYS, JSON, etc.
 app.get('/weather', (req, res) => {
-	res.send('Weather page');
+	res.send({
+		forecast: 'Sunny & windy',
+		location: 'KY'
+	});
 });
 
-// RUNNING THE SERVER BY 'Listening'
-	// .listen(portNumber, () => {})
-	// RUNS SERVER; DESIGNATE PORT NUMBER
-	// NEXT IS function FOR WHAT TO DO
+// LISTENER
 app.listen(3000, () => {
 	console.log('Server is up on 3000');
 });
