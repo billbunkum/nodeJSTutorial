@@ -16,7 +16,23 @@ console.log(path.join(__dirname, '../public'));
 	// ALLOWS express TO CHECK THIS PATH FOR path names AND SO DO NOT NEED app.get('pathName') AS BELOW FOR SERVING UP html docs
 const publicDirectoryPath = path.join(__dirname, '../public');
 
+app.set('view engine', 'hbs');
 app.use(express.static(publicDirectoryPath));
+
+// USING hbs TO render() THE index.hbs FILE
+app.get('', (req, res) => {
+	res.render('index', {
+		title: 'Weather App!',
+		name: 'iiixi'
+	});
+});
+
+app.get('/about', (req, res) => {
+	res.render('about', {
+		title: 'About Me',
+		name: 'iiixi'
+	});
+});
 
 // ROUTING BY HAND
 	// DO NOT NEED COS app.use SERVES UP HOME PATH
