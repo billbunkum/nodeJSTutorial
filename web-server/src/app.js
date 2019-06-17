@@ -15,8 +15,13 @@ console.log(path.join(__dirname, '../public'));
 // CUSTOMIZE SERVER W/ app.use()
 	// ALLOWS express TO CHECK THIS PATH FOR path names AND SO DO NOT NEED app.get('pathName') AS BELOW FOR SERVING UP html docs
 const publicDirectoryPath = path.join(__dirname, '../public');
+const viewsPath = path.join(__dirname, '../templates');
 
+// SETUP hbs ENGINE AND views/templates LOCATION
 app.set('view engine', 'hbs');
+// BY DEFAULT, templates/ IS CALLED views/, WE CHANGE IT TO views/ HERE JUST TO SHOW HOW IT CAN BE CHANGED IN hbs
+app.set('views', viewsPath);
+
 app.use(express.static(publicDirectoryPath));
 
 // USING hbs TO render() THE index.hbs FILE
@@ -31,6 +36,13 @@ app.get('/about', (req, res) => {
 	res.render('about', {
 		title: 'About Me',
 		name: 'iiixi'
+	});
+});
+
+app.get('/help', (req, res) => {
+	res.render('help', {
+		title: 'help page',
+		helpText: "here's some text"
 	});
 });
 
