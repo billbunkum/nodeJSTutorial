@@ -60,9 +60,18 @@ app.get('/weather', (req, res) => {
 });
 
 // CATCH 404's
+app.get('/help/*', (req, res) => {
+	res.render('404', {
+		title: '404 help article',
+		errorMessage: 'help-article not found',
+		name: 'iiixi'
+	});
+});
+
 app.get('*', (req, res) => {
 	res.render('404', {
-		title: '404 Page',
+		title: '404',
+		errorMessage: '404 Page',
 		name: 'iiixi'
 	});
 });
