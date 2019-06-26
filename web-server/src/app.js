@@ -31,6 +31,7 @@ app.use(express.static(publicDirectoryPath));
 // USING hbs TO render() THE index.hbs FILE
 app.get('', (req, res) => {
 	res.render('index', {
+		pageTitle: 'Weather',
 		title: 'Weather App!',
 		name: 'iiixi'
 	});
@@ -38,6 +39,7 @@ app.get('', (req, res) => {
 
 app.get('/about', (req, res) => {
 	res.render('about', {
+		pageTitle: 'About',
 		title: 'About Me',
 		name: 'iiixi'
 	});
@@ -45,23 +47,25 @@ app.get('/about', (req, res) => {
 
 app.get('/help', (req, res) => {
 	res.render('help', {
+		pageTitle: 'Help',
 		title: 'Help page',
 		name: 'iiixi',
 		helpText: "here's some text"
 	});
 });
 
-// ROUTING W/ OBJECTS, ARRAYS, JSON, etc.
-app.get('/weather', (req, res) => {
-	res.send({
-		forecast: 'Sunny & windy',
-		location: 'KY'
-	});
-});
+// // ROUTING W/ OBJECTS, ARRAYS, JSON, etc.
+// app.get('/weather', (req, res) => {
+// 	res.send({
+// 		forecast: 'Sunny & windy',
+// 		location: 'KY'
+// 	});
+// });
 
 // CATCH 404's
 app.get('/help/*', (req, res) => {
 	res.render('404', {
+		pageTitle: '404',
 		title: '404 help article',
 		errorMessage: 'help-article not found',
 		name: 'iiixi'
@@ -70,6 +74,7 @@ app.get('/help/*', (req, res) => {
 
 app.get('*', (req, res) => {
 	res.render('404', {
+		pageTitle: '404',
 		title: '404',
 		errorMessage: '404 Page',
 		name: 'iiixi'

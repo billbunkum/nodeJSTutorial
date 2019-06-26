@@ -4,6 +4,14 @@ body {
 	max-width: 650px;
 	margin: 0 auto;
 	padding: 0px 16px;
+
+	display: flex;
+	flex-direction: column;
+	min-height: 100vh;
+}
+
+.flex-container {
+	flex-grow: 1;
 }
 
 footer {
@@ -29,7 +37,7 @@ header a {
 	margin-right: 16px;
 }
 
-#picCyberGirl {
+.picCyberGirl {
 	max-width: 650px;
 	margin: 0 auto;
 }
