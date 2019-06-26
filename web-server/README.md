@@ -42,3 +42,27 @@
 				`<body> 
 					{{ >header }}
 				</body>`
+
+## Using Flexbox (CSS)
+* https://css-tricks.com/snippets/css/a-guide-to-flexbox/
+	+ Using Flexbox to have a 'sticky' Footer
+	+ Main Flexbox CSS points:
+		1. `display: flex` 
+		2. `flex-direction` 
+		3. `min-height` 
+		4. `flex-grow`
+	+ Placing `footer` outside of the `.flex-container`
+
+### EXAMPLE
+`	body {
+		display: flex;
+		flex-direction: column;
+		min-height: 100vh;
+	}
+`
+
+`	.flex-container {
+		flex-grow: 1;
+	}
+`
+
