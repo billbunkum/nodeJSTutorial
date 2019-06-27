@@ -1,7 +1,11 @@
 # Current LOCATION in tutorial
 	+ Section 6: Lesson 44 'express'
 
-## Line notes for WEATHER APP
+# Goal of WEATHER APP
+
+* User can use TERMINAL or WEB APP to get weather info. for a region They specify.
+
+## Gaining Access to TERMINAL variables
 
 * Accessing argv
 	+ `const noob = process.argv;`
@@ -66,3 +70,4 @@
 	}
 `
 
+## Using EXPRESS to create Server ENDPOINTS

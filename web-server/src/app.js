@@ -3,8 +3,10 @@ const path = require('path');
 // FOR ROUTING-EASE
 const express = require('express');
 const hbs = require('hbs');
-
 const app = express();
+
+const forecast = require('./utils/forecast.js');
+const geocode = require('./utils/geocode.js');
 
 // MAKING/SETTING UP ROUTES
 
@@ -54,13 +56,36 @@ app.get('/help', (req, res) => {
 	});
 });
 
-// // ROUTING W/ OBJECTS, ARRAYS, JSON, etc.
-// app.get('/weather', (req, res) => {
-// 	res.send({
-// 		forecast: 'Sunny & windy',
-// 		location: 'KY'
-// 	});
-// });
+// ROUTING W/ OBJECTS, ARRAYS, JSON, etc.
+app.get('/weather', (req, res) => {
+	if(!req.query.address) {
+		return res.send({
+			error: 'Must provide an address'
+		});
+	}
+
+	geocode(req.query.address, (error, { latitude, longitude, location } = {} ) => {
+		if (error) {
+			return res.send({
+				error: error
+			});
+		}
+		forecast(latitude, longitude, (error, forecastData) => {
+			let parsedData = JSON.parse(forecastData);
+			res.send({
+				error: error,
+				location: location,
+				hourly: parsedData.hourly.summary
+			});
+		});
+	});
+	// DUMMY CONTENT
+	// res.send({
+	// 	address: req.query.address,
+	// 	forecast: 'Sunny & windy',
+	// 	location: 'KY'
+	// });
+});
 
 // CATCH 404's
 app.get('/help/*', (req, res) => {
@@ -72,6 +97,21 @@ app.get('/help/*', (req, res) => {
 	});
 });
 
+// PLAYING W/ QUERY STRINGS
+	// req.query IS PART OF req
+	// console.log(req.query.search);
+app.get('/products', (req, res) => {
+	if (!req.query.search) {
+		return res.send({
+			error: 'Must provide a search'
+		});
+	}
+	res.send({
+		products: []
+	});
+});
+
+// MUST GO LAST IN routes
 app.get('*', (req, res) => {
 	res.render('404', {
 		pageTitle: '404',
