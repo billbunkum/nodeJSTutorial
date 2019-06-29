@@ -71,3 +71,13 @@
 `
 
 ## Using EXPRESS to create Server ENDPOINTS
+
+## Clientside `fetch()`
+
+* CLIENT-SIDE JS, fetch() IS NOT ACCESSIBLE IN NODEJS
+then() IS A promise
+`fetch('http://puzzle.mead.io/puzzle').then( (response) => {
+	response.json().then( (data) => {
+		console.log('promise data -> ', data);
+	});
+});`

@@ -41,3 +41,17 @@ header a {
 	max-width: 450px;
 	margin: 0 auto;
 }
+
+input {
+	border: 1px solid #cccccc;
+	padding: 8px;
+}
+
+button {
+	cursor: pointer;
+	color: #ffffff;
+	background: #888888;
+	border: 1px solid #888888;
+	padding: 8px;
+
+}
